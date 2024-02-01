@@ -1,3 +1,5 @@
+import { Link as ScrollLink } from 'react-scroll'
+
 import Logo from '@/assets/logo.svg'
 
 function Header() {
@@ -5,18 +7,22 @@ function Header() {
     {
       id: 1,
       title: 'Início',
+      target: 'home',
     },
     {
       id: 2,
       title: 'Sobre',
+      target: 'about',
     },
     {
       id: 3,
       title: 'Serviço',
+      target: 'services',
     },
     {
       id: 4,
       title: 'Contato',
+      target: 'contact',
     },
   ]
   return (
@@ -28,8 +34,15 @@ function Header() {
         {menuList.map((item) => (
           <div>
             <h2 className="relative inline-block group cursor-pointer">
-              <span className="absolute inset-x-0 bottom-0 h-0.5 bg-transparent group-hover:bg-primary-purple transition-all duration-300" />
-              {item.title}
+              <span className="absolute inset-x-0 bottom-0 h-0.5 bg-transparent group-hover:bg-white transition-all duration-300" />
+              <ScrollLink
+                to={item.target}
+                smooth
+                duration={500}
+                className="group-hover:text-white transition-all duration-300"
+              >
+                {item.title}
+              </ScrollLink>
             </h2>
           </div>
         ))}
