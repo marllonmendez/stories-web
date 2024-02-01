@@ -4,8 +4,8 @@ import About from '@/pages/About'
 
 function App() {
   return (
-    <main className="w-full">
-      <div className="custom-gradient h-screen flex flex-col">
+    <main>
+      <div className="custom-gradient">
         <Header />
         <Hero />
       </div>

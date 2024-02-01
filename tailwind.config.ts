@@ -4,17 +4,18 @@ const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/styles/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     fontFamily: {
       sans: ['Inter', 'sans-serif'],
     },
     fontSize: {
-      'font-title': '1.75rem',
+      'font-title': '4.75rem',
       'font-title-hero': '2.2rem',
       'font-description': '1.2rem',
       'font-description-hero': '1.25rem',
+      'font-topics': '1.75rem',
     },
     extend: {
       colors: {
