@@ -1,8 +1,11 @@
 {
   "name": "stories",
-  "version": "1.1.1-dev",
+  "version": "1.1.4-dev",
   "private": true,
   "type": "module",
+  "author": "marllonmendez",
+  "license": "ISC",
+  "description": "",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -41,7 +44,7 @@
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
   },
-  "author": "marllonmendez",
-  "license": "ISC",
-  "description": ""
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.9.5"
+  }
 }
