@@ -2,25 +2,21 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-/* width */
-::-webkit-scrollbar {
-  width: 8px;
+*::-webkit-scrollbar {
+  width: 4px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
-  background: #888;
+  background: #4E4B59;
 
 }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #555;
-  border-radius: 5px;
+*::-webkit-scrollbar-thumb {
+  background: #01010c;
+  border-radius: 4px;
 }
 
 .custom-gradient {
   background: linear-gradient(116.51deg, #05041B 37.48%, #6000b4 152.45%);
-  color: white;
 }
 

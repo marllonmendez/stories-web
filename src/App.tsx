@@ -1,15 +1,15 @@
-import Header from '@/pages/Header'
-import Hero from '@/pages/Hero'
+import React from 'react'
+
+import Home from '@/pages/Home'
 import About from '@/pages/About'
+import Service from '@/pages/Service'
 
 function App() {
   return (
     <main>
-      <div className="custom-gradient">
-        <Header />
-        <Hero />
-      </div>
+      <Home />
       <About />
+      <Service />
     </main>
   )
 }
