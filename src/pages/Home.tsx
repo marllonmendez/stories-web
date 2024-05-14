@@ -1,11 +1,9 @@
 import React from 'react'
 
-import {
-  AboutSection,
-  ContactSection,
-  HomeSection,
-  ServiceSection,
-} from '@/components/Sections'
+import { HomeSection } from '@/components/Sections/HomeSection'
+import { AboutSection } from '@/components/Sections/AboutSection'
+import { ServiceSection } from '@/components/Sections/ServiceSection'
+import { ContactSection } from '@/components/Sections/ContactSection'
 
 const Home = () => {
   return (

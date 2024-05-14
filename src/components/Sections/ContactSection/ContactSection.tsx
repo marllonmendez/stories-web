@@ -1,28 +1,88 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { motion } from 'framer-motion'
+import emailjs from '@emailjs/browser'
 
 import { Container, SubContainer } from '@/components/Container'
-import { Input } from '@/components/Input'
+import { Input, InputMessage } from '@/components/Input'
 import { Button } from '@/components/Button'
-import { InputMessage } from '@/components/Input/InputMessage'
+
+import { PublicKey, ServiceID, TemplateID } from '@/utils/EmailJS'
 
 export function ContactSection() {
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [message, setMessage] = useState('')
+
+  function sendEmail(e: any) {
+    e.preventDefault()
+
+    if (name === '' || email === '' || message === '') {
+      alert('Preencha todos os campos')
+      return
+    }
+
+    const templateParams = {
+      from_name: name,
+      message,
+      email,
+    }
+
+    emailjs.send(ServiceID, TemplateID, templateParams, PublicKey).then(
+      (response) => {
+        console.log('EMAIL ENVIADO', response.status, response.text)
+        setName('')
+        setEmail('')
+        setMessage('')
+      },
+      (err) => {
+        console.log('ERRO: ', err)
+      },
+    )
+  }
+
   return (
-    <Container label="contact" className="bg-dark">
-      <SubContainer>
-        <div className="max-w-md w-full mx-auto p-10 bg-purpleMedium rounded-md focus:border-light shadow-md">
-          <form className="flex flex-col gap-2">
-            <h2 className="text-3xl text-yellowDark font-bold text-center mb-4">
-              Entre em contato conosco
-            </h2>
-            <Input label="Nome" placeHolder="usuário" />
-            <Input label="E-mail" placeHolder="usuario@email.com" />
-            <InputMessage label="Mensagem" placeHolder="Mensagem do usuário" />
-            <Button
-              label="Enviar"
-              className="bg-purple/75 mb-9 text-light font-medium w-full px-4 py-2 rounded-md hover:bg-purple transition ease-in duration-300"
-            />
-          </form>
-        </div>
+    <Container
+      label="contact"
+      className="bg-dark text-light flex items-center justify-center h-full w-full"
+    >
+      <SubContainer className="flex flex-col items-center justify-center text-center max-w-[700px] gap-5">
+        <motion.form
+          className="w-full flex flex-col gap-5 lg:p-2 md:p-2"
+          onSubmit={sendEmail}
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 50 }}
+        >
+          <motion.h3
+            className="text-3xl md:text-3xl xs:text-xl font-medium"
+            initial={{ opacity: 0, x: -100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -100 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            Gostaria de atendimento? <br />
+            Entre em contato
+          </motion.h3>
+          <Input
+            type="text"
+            placeHolder="Nome"
+            value={name}
+            updateValue={(value) => setName(value)}
+          />
+          <Input
+            type="email"
+            placeHolder="E-mail"
+            value={email}
+            updateValue={(value) => setEmail(value)}
+          />
+          <InputMessage
+            placeHolder="Mensagem"
+            maxLength={500}
+            value={message}
+            updateValue={(value) => setMessage(value)}
+          />
+          <Button label="Enviar" className="w-full"/>
+        </motion.form>
       </SubContainer>
     </Container>
   )

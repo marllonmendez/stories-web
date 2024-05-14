@@ -2,6 +2,18 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: #7B68EE;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #FFA500;
+}
+
 .custom-gradient {
   background: linear-gradient(116.51deg, #05041B 37.48%, #6000b4 152.45%);
 }
