@@ -1,6 +1,6 @@
 {
   "name": "stories",
-  "version": "1.4.8",
+  "version": "1.4.9",
   "private": true,
   "type": "module",
   "author": "marllonmendez",
@@ -45,5 +45,8 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.9.5"
   }
 }
