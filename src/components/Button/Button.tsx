@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 type ButtonProps = {
   label: string
@@ -18,7 +19,7 @@ export function Button({
   return (
     <>
       {page ? (
-        <a href={page}>
+        <Link to={page}>
           <button
             type="submit"
             value={value}
@@ -28,7 +29,7 @@ export function Button({
             {label}
             {children}
           </button>
-        </a>
+        </Link>
       ) : (
         <button
           type="submit"
