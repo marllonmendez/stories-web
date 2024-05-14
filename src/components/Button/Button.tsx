@@ -1,10 +1,15 @@
 import React from 'react'
 
 type ButtonProps = {
-  name: string
-  style: string
+  label: string
+  className: string
+  page?: string
 }
 
-export function Button({ name, style }: ButtonProps) {
-  return <button className={style}>{name}</button>
+export function Button({ label, className, page }: ButtonProps) {
+  return (
+    <a href={page}>
+      <button className={className}>{label}</button>
+    </a>
+  )
 }

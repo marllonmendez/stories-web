@@ -39,12 +39,12 @@ export function Header() {
               to={item.target}
               smooth
               duration={500}
-              className="group text-light"
+              className="group text-light hover:text-yellowDark transition-all ease duration-300"
             >
               {item.title}
             </Link>
             <motion.span
-              className="h-[1px] inline-block bg-light absolute left-0 -bottom-0.5 w-0 group-hover:w-full transition-[width] ease duration-300"
+              className="h-[1px] inline-block bg-yellowDark absolute left-0 -bottom-0.5 w-0 group-hover:w-full transition-[width] ease duration-300"
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ duration: 0.3 }}

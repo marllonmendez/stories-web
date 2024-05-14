@@ -1,17 +1,7 @@
-import React from 'react'
-
-import Home from '@/pages/Home'
-import About from '@/pages/About'
-import Service from '@/pages/Service'
+import AppRoutes from '@/Routes'
 
 function App() {
-  return (
-    <main>
-      <Home />
-      <About />
-      <Service />
-    </main>
-  )
+  return <AppRoutes />
 }
 
 export default App

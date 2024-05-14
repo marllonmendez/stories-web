@@ -9,8 +9,8 @@ type ContainerProps = {
 
 export function Container({ label, className, children }: ContainerProps) {
   return (
-    <Element id={label} name={label} className={`min-h-screen ${className}`}>
-      {children}
+    <Element id={label} name={label} className={`${className}`}>
+      <div>{children}</div>
     </Element>
   )
 }

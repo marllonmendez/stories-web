@@ -8,9 +8,9 @@ type temsProps = {
 
 export function Items({ label, icon: Icon }: temsProps) {
   return (
-    <div className="flex items-center justify-center mr-8 text-primary-white">
-      <Icon />
-      <p className="ml-2">{label}</p>
+    <div className="flex items-center justify-center mr-8 text-light font-medium">
+      <Icon size={30} className="text-light" />
+      <p className="ml-2 uppercase">{label}</p>
     </div>
   )
 }

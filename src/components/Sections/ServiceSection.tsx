@@ -2,14 +2,12 @@ import React from 'react'
 
 import { Container, SubContainer } from '@/components/Container'
 
-const Service = () => {
+export function ServiceSection() {
   return (
-    <Container label="service">
+    <Container label="service" className="bg-dark">
       <SubContainer>
-        <p>teste</p>
+        <h1 className="text-light text-8xl">Faça serviço</h1>
       </SubContainer>
     </Container>
   )
 }
-
-export default Service

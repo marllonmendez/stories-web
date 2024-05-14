@@ -1,28 +1,21 @@
 import type { Config } from 'tailwindcss'
 
+import { fontFamily } from 'tailwindcss/defaultTheme'
+
 const config: Config = {
-  content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/styles/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
+  content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
-    fontFamily: {
-      sans: ['Inter', 'sans-serif'],
-    },
-    fontSize: {
-      'font-title': '4.75rem',
-      'font-title-hero': '2.2rem',
-      'font-description': '1.2rem',
-      'font-description-hero': '1.25rem',
-      'font-topics': '1.25rem',
-    },
     extend: {
+      fontFamily: {
+        sans: ['Poppins', ...fontFamily.sans],
+      },
       colors: {
-        purple: '#520AD1',
+        purple: '#7B68EE',
+        purpleDark: '#520AD1',
+        yellow: '#FFD700',
+        yellowDark: '#FFA500',
         light: '#F4F4F4',
-        gray: '#4E4B59',
-        dark: '#01010c',
+        dark: '#05041B',
       },
     },
   },
