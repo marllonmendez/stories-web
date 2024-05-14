@@ -1,17 +1,7 @@
-import Header from '@/pages/Header'
-import Hero from '@/pages/Hero'
-import About from '@/pages/About'
+import AppRoutes from '@/Routes'
 
 function App() {
-  return (
-    <main>
-      <div className="custom-gradient">
-        <Header />
-        <Hero />
-      </div>
-      <About />
-    </main>
-  )
+  return <AppRoutes />
 }
 
 export default App

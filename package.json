@@ -1,6 +1,6 @@
 {
   "name": "stories",
-  "version": "1.1.4-dev",
+  "version": "1.4.7-dev",
   "private": true,
   "type": "module",
   "author": "marllonmendez",
@@ -14,7 +14,9 @@
     "format": "prettier ."
   },
   "dependencies": {
+    "@emailjs/browser": "^4.3.3",
     "dotenv": "^16.4.1",
+    "framer-motion": "^11.1.9",
     "lucide-react": "^0.319.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -43,8 +45,5 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
-  },
-  "author": "marllonmendez",
-  "license": "ISC",
-  "description": ""
+  }
 }
