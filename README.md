@@ -19,7 +19,7 @@
 ## Sobre
 O projeto **"Stories"** é uma aplicação desenvolvida por Marlon Mendes, destinada a contar e compartilhar histórias atraves de fotos de uma maneira cativante e envolvente. A plataforma é concebida como um espaço digital para que os usuários compartilhem suas experiências, memórias e reflexões de forma única, utilizando uma variedade de recursos e tecnologias modernas.
 
-![Page](Image/page.png)
+![Page](src/assets/Image.png)
 
 ## Execução
 
