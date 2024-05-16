@@ -15,14 +15,14 @@ export function HomeSection() {
       <SubContainer className="flex-col items-center justify-center">
         <div className="flex flex-col items-center w-full md:flex-row md:text-left mt-[-80px]">
           <div className="md:pr-8 md:mb-0 w-1/2">
-            <h1 className="text-4xl font-bold text-yellowDark mb-4">
+            <h1 className="text-4xl font-bold text-yellowDark">
               Um mundo de memórias à sua espera
             </h1>
-            <p className="text-xl font-extralight mb-8">
+            <p className="text-xl text-light font-extralight my-4">
               Na vida eu sou a nostalgia que perdura, a essência de momento, a
               memória de uma recordação entre as estrelas.
             </p>
-            <Button label="Sing Up" page="/singUp" className="w-1/2" />
+            <Button label="Sing Up" page="/register" className="w-1/2" />
           </div>
           <motion.div
             className="flex justify-center w-1/2"

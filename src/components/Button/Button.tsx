@@ -6,6 +6,7 @@ type ButtonProps = {
   value?: string
   className?: string
   page?: string
+  click?: any
   children?: React.ReactNode
 }
 
@@ -14,6 +15,7 @@ export function Button({
   value,
   className,
   page,
+  click,
   children,
 }: ButtonProps) {
   return (
@@ -23,7 +25,8 @@ export function Button({
           <button
             type="submit"
             value={value}
-            className={`p-2 mb-8 px-6 py-3 text-xl font-bold rounded-full bg-purple/75 text-light shadow-2xl hover:bg-purple transition ease-in duration-300
+            onClick={click}
+            className={`p-2 mb-8 px-6 py-3 text-xl font-bold border-none rounded-3xl bg-purple/75 text-light shadow-2xl hover:bg-purple transition ease-in duration-300
             ${className}`}
           >
             {label}
@@ -34,7 +37,8 @@ export function Button({
         <button
           type="submit"
           value={value}
-          className={`p-2 mb-8 px-6 py-3 text-xl font-bold rounded-full bg-purple/75 text-light shadow-2xl hover:bg-purple transition ease-in duration-300
+          onClick={click}
+          className={`p-2 mb-8 px-6 py-3 text-xl font-bold border-none rounded-3xl bg-purple/75 text-light shadow-2xl hover:bg-purple transition ease-in duration-300
             ${className}`}
         >
           {label}

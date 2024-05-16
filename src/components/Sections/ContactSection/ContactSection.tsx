@@ -43,26 +43,27 @@ export function ContactSection() {
   return (
     <Container
       label="contact"
-      className="bg-dark text-light flex items-center justify-center h-full w-full"
+      className="flex items-center justify-center h-full w-full bg-dark text-light"
     >
-      <SubContainer className="flex flex-col items-center justify-center text-center max-w-[700px] gap-5">
+      <SubContainer className="flex flex-col items-center justify-center text-center gap-5">
+        <motion.h1
+          className="text-light text-3xl md:text-3xl xs:text-xl font-medium"
+          initial={{ opacity: 0, x: -100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -100 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          Gostaria de atendimento? <br />
+          Entre em contato
+        </motion.h1>
         <motion.form
-          className="w-full flex flex-col gap-5 lg:p-2 md:p-2"
+          className="flex flex-col w-full h-full gap-5 lg:p-2 md:p-2"
           onSubmit={sendEmail}
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 50 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <motion.h3
-            className="text-3xl md:text-3xl xs:text-xl font-medium"
-            initial={{ opacity: 0, x: -100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -100 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            Gostaria de atendimento? <br />
-            Entre em contato
-          </motion.h3>
           <Input
             type="text"
             placeHolder="Nome"
@@ -81,7 +82,9 @@ export function ContactSection() {
             value={message}
             updateValue={(value) => setMessage(value)}
           />
-          <Button label="Enviar" className="w-full"/>
+          <div className="flex flex-col items-center justify-center text-center">
+            <Button label="Enviar" className="w-1/2" />
+          </div>
         </motion.form>
       </SubContainer>
     </Container>

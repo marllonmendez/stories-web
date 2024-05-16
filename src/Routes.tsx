@@ -2,16 +2,14 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 import Home from '@/pages/Home'
-import SingUp from '@/pages/SingUp'
-import Login from '@/pages/Login'
+import Register from '@/pages/Register'
 
 const AppRoutes = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="singUp" element={<SingUp />} />
-        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
       </Routes>
     </Router>
   )

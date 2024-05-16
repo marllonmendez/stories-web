@@ -64,7 +64,6 @@ export function AboutSection() {
               isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }
             }
             transition={{
-              delay: 0.2,
               duration: 1,
               ease: [0, 0.71, 0.2, 1.01],
             }}

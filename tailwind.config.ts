@@ -16,6 +16,7 @@ const config: Config = {
         yellowDark: '#FFA500',
         light: '#F4F4F4',
         dark: '#05041B',
+        darkSecondary: '#131429',
       },
     },
   },
