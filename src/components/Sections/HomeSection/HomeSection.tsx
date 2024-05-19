@@ -22,7 +22,7 @@ export function HomeSection() {
               Na vida eu sou a nostalgia que perdura, a essência de momento, a
               memória de uma recordação entre as estrelas.
             </p>
-            <Button label="Sing Up" page="/register" className="w-1/2" />
+            <Button label="Sing Up" page="/SingUp" className="w-1/2" />
           </div>
           <motion.div
             className="flex justify-center w-1/2"

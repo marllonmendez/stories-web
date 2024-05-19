@@ -1,15 +1,34 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { LockKeyhole, Mail, UserRound } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 import { SubContainer } from '@/components/Container'
 import { Input } from '@/components/Input'
 import { Button } from '@/components/Button'
 
-import Login from '@/assets/Login.svg'
+import SingIn from '@/assets/SingIn.svg'
 import SingUp from '@/assets/SingUp.svg'
+import { IUser } from '@/interface/IUser'
+import EndPoints from '@/service/EndPoints'
 
 const Register = () => {
-  const [isLogin, setIsLogin] = useState(false)
+  const location = useLocation()
+  const navigate = useNavigate()
+  const [isLogin, setIsLogin] = useState(location.pathname === '/SingIn')
+  const [error, setError] = useState<IUser>()
+  const [passwordShown, setPasswordShown] = useState(false)
+  const [name, setName] = useState<string>('')
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+
+  useEffect(() => {
+    if (isLogin) {
+      navigate('/SingIn')
+    } else {
+      navigate('/SingUp')
+    }
+  }, [isLogin, navigate])
 
   const handleLoginButtonClick = () => {
     setIsLogin(true)
@@ -17,6 +36,50 @@ const Register = () => {
 
   const handleLogoutButtonClick = () => {
     setIsLogin(false)
+  }
+
+  const togglePassword = useCallback(() => {
+    setPasswordShown((oldState) => !oldState)
+  }, [setPasswordShown])
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    const formData: IUser = {
+      name,
+      email,
+      password,
+    }
+
+    if (!formData.name || !formData.email || !formData.password) {
+      setError({
+        name: 'O campo nome é obrigatório',
+        email: 'O campo email é obrigatório',
+        password: 'O campo senha é obrigatório',
+      })
+      return
+    }
+
+    try {
+      const response = isLogin
+        ? await EndPoints.Signin(formData)
+        : await EndPoints.Signup(formData)
+      onClear()
+      return response.data
+    } catch (err: any) {
+      setError(err.response?.data?.error.message)
+    }
+  }
+
+  const onClear = () => {
+    setName('')
+    setEmail('')
+    setPassword('')
+    setError({
+      name: '',
+      email: '',
+      password: '',
+    })
   }
 
   return (
@@ -46,13 +109,15 @@ const Register = () => {
               }}
             />
             <Button
-              label={`${isLogin ? 'Sing Up' : 'Login'}`}
-              click={isLogin ? handleLogoutButtonClick : handleLoginButtonClick}
+              label={`${isLogin ? 'Sing Up' : 'Sing In'}`}
+              onClick={
+                isLogin ? handleLogoutButtonClick : handleLoginButtonClick
+              }
               className="w-full"
             />
             <motion.img
-              src={`${isLogin ? SingUp : Login}`}
-              alt="Login"
+              src={`${isLogin ? SingUp : SingIn}`}
+              alt={`${isLogin ? 'Sign Up' : 'Sing In'}`}
               className="w-[13rem] h-[14rem]"
               initial={{ opacity: 1 }}
               animate={{ y: [5, -5] }}
@@ -88,13 +153,60 @@ const Register = () => {
               whileInView={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 50 }}
               transition={{ duration: 0.5, delay: 0.2 }}
+              onSubmit={handleSubmit}
             >
-              <Input type="text" placeHolder="Nome" />
-              <Input type="email" placeHolder="E-mail" />
-              <Input type="text" placeHolder="Senha" />
+              {isLogin ? (
+                <>
+                  <Input
+                    type="email"
+                    value={email}
+                    updateValue={(value) => setEmail(value)}
+                    placeHolder="E-mail do usuário"
+                    icon={Mail}
+                    errorMessage={error?.email}
+                  />
+                  <Input
+                    type={passwordShown ? 'text' : 'password'}
+                    value={password}
+                    updateValue={(value) => setPassword(value)}
+                    placeHolder="Senha do usuário"
+                    icon={LockKeyhole}
+                    passwordState={{ passwordShown, togglePassword }}
+                    errorMessage={error?.password}
+                  />
+                </>
+              ) : (
+                <>
+                  <Input
+                    type="text"
+                    value={name}
+                    updateValue={(value) => setName(value)}
+                    placeHolder="Nome do usuário"
+                    icon={UserRound}
+                    errorMessage={error?.name}
+                  />
+                  <Input
+                    type="email"
+                    value={email}
+                    updateValue={(value) => setEmail(value)}
+                    placeHolder="E-mail do usuário"
+                    icon={Mail}
+                    errorMessage={error?.email}
+                  />
+                  <Input
+                    type={passwordShown ? 'text' : 'password'}
+                    value={password}
+                    updateValue={(value) => setPassword(value)}
+                    placeHolder="Senha do usuário"
+                    icon={LockKeyhole}
+                    passwordState={{ passwordShown, togglePassword }}
+                    errorMessage={error?.password}
+                  />
+                </>
+              )}
               <div className="flex flex-col items-center justify-center text-center">
                 <Button
-                  label={`${isLogin ? 'Login' : 'Sing Up'}`}
+                  label={`${isLogin ? 'Sing In' : 'Sing Up'}`}
                   className="w-1/2"
                 />
               </div>
