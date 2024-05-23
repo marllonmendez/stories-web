@@ -1,21 +1,23 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { LockKeyhole, Mail, UserRound } from 'lucide-react'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 
 import { SubContainer } from '@/components/Container'
 import { Input } from '@/components/Input'
 import { Button } from '@/components/Button'
+import { Message } from '@/components/Message'
+import { IUser } from '@/interface/IUser'
 
+import EndPoints from '@/service/EndPoints'
 import SingIn from '@/assets/SingIn.svg'
 import SingUp from '@/assets/SingUp.svg'
-import { IUser } from '@/interface/IUser'
-import EndPoints from '@/service/EndPoints'
 
 const Register = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const [isLogin, setIsLogin] = useState(location.pathname === '/SingIn')
+  const [successMessage, setSuccessMessage] = useState<boolean>(false)
   const [error, setError] = useState<IUser>()
   const [passwordShown, setPasswordShown] = useState(false)
   const [name, setName] = useState<string>('')
@@ -38,9 +40,25 @@ const Register = () => {
     setIsLogin(false)
   }
 
+  const handleClose = () => {
+    setSuccessMessage(false)
+  }
+
   const togglePassword = useCallback(() => {
     setPasswordShown((oldState) => !oldState)
   }, [setPasswordShown])
+
+  useEffect(() => {
+    if (name && error?.name) {
+      setError((prevError) => ({ ...prevError, name: '' }))
+    }
+    if (email && error?.email) {
+      setError((prevError) => ({ ...prevError, email: '' }))
+    }
+    if (password && error?.password) {
+      setError((prevError) => ({ ...prevError, password: '' }))
+    }
+  }, [name, email, password])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -51,13 +69,14 @@ const Register = () => {
       password,
     }
 
-    if (!formData.name || !formData.email || !formData.password) {
-      setError({
-        name: 'O campo nome é obrigatório',
-        email: 'O campo email é obrigatório',
-        password: 'O campo senha é obrigatório',
-      })
+    if (!formData.name) {
+      setError({ name: 'O campo é obrigatório' })
       return
+    } else if (!formData.email) {
+      setError({ email: 'O campo é obrigatório' })
+      return
+    } else if (!formData.password) {
+      setError({ password: 'O campo é obrigatório' })
     }
 
     try {
@@ -65,6 +84,7 @@ const Register = () => {
         ? await EndPoints.Signin(formData)
         : await EndPoints.Signup(formData)
       onClear()
+      setSuccessMessage(true)
       return response.data
     } catch (err: any) {
       setError(err.response?.data?.error.message)
@@ -85,6 +105,9 @@ const Register = () => {
   return (
     <SubContainer className="flex items-center justify-center custom-gradient">
       <div className="flex flex-grow items-center justify-center">
+        <AnimatePresence>
+          {successMessage && <Message onClose={handleClose} />}
+        </AnimatePresence>
         <motion.div
           className={`flex flex-grow items-center justify-center text-center bg-dark/75 text-light w-1/2 min-h-[80svh] ${isLogin ? 'rounded-e-3xl' : 'rounded-s-3xl'}`}
           animate={{ opacity: 1, x: isLogin ? '100%' : 0 }}

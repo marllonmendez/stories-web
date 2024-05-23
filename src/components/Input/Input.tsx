@@ -36,6 +36,15 @@ export const Input: React.FC<IInput> = ({
     }
   }
 
+  const getErrorMessage = (): string | undefined => {
+    if (isFocused && !value) return 'O campo é obrigatório'
+    if (isFocused && type === 'password' && value && value.length < 5)
+      return 'Mínimo de 5 caracteres'
+    return undefined
+  }
+
+  const setErrorMessage = getErrorMessage() || errorMessage
+
   return (
     <div className="flex flex-col">
       <div className="flex items-center h-full w-full relative">
@@ -85,11 +94,11 @@ export const Input: React.FC<IInput> = ({
           </button>
         ) : null}
       </div>
-      {!value && errorMessage ? (
+      {setErrorMessage && (
         <span className="flex w-full text-sm flex-wrap text-red-600 p-1">
-          {errorMessage}
+          {setErrorMessage}
         </span>
-      ) : null}
+      )}
     </div>
   )
 }
