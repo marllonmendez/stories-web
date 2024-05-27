@@ -1,9 +1,11 @@
 import React, { useCallback, useRef, useState } from 'react'
 import { Eye, EyeOff } from 'lucide-react'
-import { IInput } from '@/interface/IInput'
+import { IInput } from '@/interfaces'
 
 export const Input: React.FC<IInput> = ({
   placeHolder,
+  id,
+  name,
   type,
   value,
   updateValue,
@@ -58,6 +60,8 @@ export const Input: React.FC<IInput> = ({
         </span>
         {inputRef ? (
           <input
+            id={id}
+            name={name}
             placeholder={placeHolder}
             type={type}
             value={value}

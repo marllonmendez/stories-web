@@ -7,16 +7,18 @@ import { SubContainer } from '@/components/Container'
 import { Input } from '@/components/Input'
 import { Button } from '@/components/Button'
 import { Message } from '@/components/Message'
-import { IUser } from '@/interface/IUser'
 
-import EndPoints from '@/service/EndPoints'
+import { useAuth } from '@/auth/useAuth'
+import { IUser, IEventForm } from '@/interfaces'
+
 import SingIn from '@/assets/SingIn.svg'
 import SingUp from '@/assets/SingUp.svg'
 
 const Register = () => {
   const location = useLocation()
   const navigate = useNavigate()
-  const [isLogin, setIsLogin] = useState(location.pathname === '/SingIn')
+  const auth = useAuth()
+  const [isLogin, setIsLogin] = useState(location.pathname === '/SignIn')
   const [successMessage, setSuccessMessage] = useState<boolean>(false)
   const [error, setError] = useState<IUser>()
   const [passwordShown, setPasswordShown] = useState(false)
@@ -26,9 +28,9 @@ const Register = () => {
 
   useEffect(() => {
     if (isLogin) {
-      navigate('/SingIn')
+      navigate('/SignIn', { replace: true })
     } else {
-      navigate('/SingUp')
+      navigate('/SignUp', { replace: true })
     }
   }, [isLogin, navigate])
 
@@ -42,7 +44,29 @@ const Register = () => {
 
   const handleClose = () => {
     setSuccessMessage(false)
+    handleLoginButtonClick()
   }
+
+  const handleSignupCallback = useCallback(() => {
+    onClear()
+    setSuccessMessage(true)
+  }, [setSuccessMessage])
+
+  const handleSignInCallback = useCallback(() => {
+    onClear()
+    navigate('/Profile', { replace: true })
+  }, [navigate])
+
+  const onClear = useCallback(() => {
+    setName('')
+    setEmail('')
+    setPassword('')
+    setError({
+      name: '',
+      email: '',
+      password: '',
+    })
+  }, [])
 
   const togglePassword = useCallback(() => {
     setPasswordShown((oldState) => !oldState)
@@ -60,53 +84,61 @@ const Register = () => {
     }
   }, [name, email, password])
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    const formData: IUser = {
-      name,
-      email,
-      password,
-    }
+    const {
+      name: InputName,
+      email: InputEmail,
+      password: InputPassword,
+    } = e.target as typeof e.target & IEventForm
 
-    if (!formData.name) {
+    if (!InputName.value) {
       setError({ name: 'O campo é obrigatório' })
       return
-    } else if (!formData.email) {
+    } else if (!InputEmail.value) {
       setError({ email: 'O campo é obrigatório' })
       return
-    } else if (!formData.password) {
+    } else if (!InputPassword.value) {
       setError({ password: 'O campo é obrigatório' })
+      return
     }
 
-    try {
-      const response = isLogin
-        ? await EndPoints.Signin(formData)
-        : await EndPoints.Signup(formData)
-      onClear()
-      setSuccessMessage(true)
-      return response.data
-    } catch (err: any) {
-      setError(err.response?.data?.error.message)
+    if (isLogin) {
+      console.log('Fazendo login...')
+      auth.signin(
+        {
+          email: InputEmail.value,
+          password: InputPassword.value,
+        },
+        handleSignInCallback, // Correção aqui
+      )
+      console.log('Usuário logado')
+    } else {
+      console.log('Registrando usuário...')
+      await auth.signup(
+        {
+          name: InputName.value,
+          email: InputEmail.value,
+          password: InputPassword.value,
+        },
+        handleSignupCallback, // Correção aqui
+      )
+      console.log('Usuário registrado')
     }
-  }
-
-  const onClear = () => {
-    setName('')
-    setEmail('')
-    setPassword('')
-    setError({
-      name: '',
-      email: '',
-      password: '',
-    })
   }
 
   return (
     <SubContainer className="flex items-center justify-center custom-gradient">
       <div className="flex flex-grow items-center justify-center">
         <AnimatePresence>
-          {successMessage && <Message onClose={handleClose} />}
+          {successMessage && (
+            <Message
+              title="Tudo certo!"
+              description="Usuário cadastrado com suceso."
+              onClose={handleClose}
+            />
+          )}
         </AnimatePresence>
         <motion.div
           className={`flex flex-grow items-center justify-center text-center bg-dark/75 text-light w-1/2 min-h-[80svh] ${isLogin ? 'rounded-e-3xl' : 'rounded-s-3xl'}`}
@@ -132,15 +164,15 @@ const Register = () => {
               }}
             />
             <Button
-              label={`${isLogin ? 'Sing Up' : 'Sing In'}`}
+              label={`${isLogin ? 'Sign up' : 'Sign in'}`}
               onClick={
                 isLogin ? handleLogoutButtonClick : handleLoginButtonClick
               }
-              className="w-full"
+              className="w-full bg-purple/75 text-light border-none hover:bg-purple transition ease-in duration-300"
             />
             <motion.img
               src={`${isLogin ? SingUp : SingIn}`}
-              alt={`${isLogin ? 'Sign Up' : 'Sing In'}`}
+              alt={`${isLogin ? 'Sign up' : 'Sign in'}`}
               className="w-[13rem] h-[14rem]"
               initial={{ opacity: 1 }}
               animate={{ y: [5, -5] }}
@@ -179,9 +211,12 @@ const Register = () => {
               onSubmit={handleSubmit}
             >
               {isLogin ? (
+                // campos para login
                 <>
                   <Input
                     type="email"
+                    id="email"
+                    name="email"
                     value={email}
                     updateValue={(value) => setEmail(value)}
                     placeHolder="E-mail do usuário"
@@ -190,6 +225,8 @@ const Register = () => {
                   />
                   <Input
                     type={passwordShown ? 'text' : 'password'}
+                    id="password"
+                    name="password"
                     value={password}
                     updateValue={(value) => setPassword(value)}
                     placeHolder="Senha do usuário"
@@ -199,9 +236,12 @@ const Register = () => {
                   />
                 </>
               ) : (
+                // campos para cadastro
                 <>
                   <Input
                     type="text"
+                    id="name"
+                    name="name"
                     value={name}
                     updateValue={(value) => setName(value)}
                     placeHolder="Nome do usuário"
@@ -210,6 +250,8 @@ const Register = () => {
                   />
                   <Input
                     type="email"
+                    id="email"
+                    name="email"
                     value={email}
                     updateValue={(value) => setEmail(value)}
                     placeHolder="E-mail do usuário"
@@ -218,6 +260,8 @@ const Register = () => {
                   />
                   <Input
                     type={passwordShown ? 'text' : 'password'}
+                    id="password"
+                    name="password"
                     value={password}
                     updateValue={(value) => setPassword(value)}
                     placeHolder="Senha do usuário"
@@ -229,8 +273,8 @@ const Register = () => {
               )}
               <div className="flex flex-col items-center justify-center text-center">
                 <Button
-                  label={`${isLogin ? 'Sing In' : 'Sing Up'}`}
-                  className="w-1/2"
+                  label={`${isLogin ? 'Sing in' : 'Sing up'}`}
+                  className="w-1/2 bg-purple/75 text-light border-none hover:bg-purple transition ease-in duration-300"
                 />
               </div>
             </motion.form>

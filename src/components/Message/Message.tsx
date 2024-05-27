@@ -5,10 +5,12 @@ import { motion } from 'framer-motion'
 import { Button, CloseButton } from '@/components/Button'
 
 type MessageProps = {
+  title: string
+  description: string
   onClose: () => void
 }
 
-export function Message({ onClose }: MessageProps) {
+export function Message({ title, description, onClose }: MessageProps) {
   return (
     <div className="flex fixed mx-auto bg-darkSecondary/50 w-full h-full justify-center items-center z-[1000]">
       <motion.div
@@ -24,14 +26,12 @@ export function Message({ onClose }: MessageProps) {
         <CloseButton onClick={onClose} />
         <div className="flex flex-col items-center justify-center my-2">
           <Check size={70} className="text-gray-500" />
-          <h1 className="text-purple font-medium text-lg">Tudo certo!</h1>
-          <p className="text-dark text-sm font-light">
-            Usuário cadastrado com suceso.
-          </p>
+          <h1 className="text-purple font-medium text-lg">{title}</h1>
+          <p className="text-dark text-sm font-light">{description}</p>
         </div>
         <Button
           label="Fechar"
-          className="w-[200px] rounded-e rounded-l mt-4"
+          className="w-[200px] rounded-e rounded-l mt-4 bg-purple/75 text-light border-none hover:bg-purple transition ease-in duration-300"
           onClick={onClose}
         />
       </motion.div>

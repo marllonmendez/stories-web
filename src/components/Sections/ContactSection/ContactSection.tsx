@@ -83,7 +83,10 @@ export function ContactSection() {
             updateValue={(value) => setMessage(value)}
           />
           <div className="flex flex-col items-center justify-center text-center">
-            <Button label="Enviar" className="w-1/2" />
+            <Button
+              label="Enviar"
+              className="w-1/2 bg-purple/75 text-light border-none hover:bg-purple transition ease-in duration-300"
+            />
           </div>
         </motion.form>
       </SubContainer>
