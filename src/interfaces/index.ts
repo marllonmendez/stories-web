@@ -1,8 +1,10 @@
 import { LucideIcon } from 'lucide-react'
 
 export interface IUser {
+  id?: string
   name?: string
   email?: string
+  isAdmin?: boolean
   password?: string
 }
 
@@ -27,6 +29,7 @@ export interface IInput {
   updateValue?(value: string): void
   icon?: LucideIcon
   errorMessage?: string
+  maxLength?: number
   passwordState?: IPassword
 }
 

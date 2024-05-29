@@ -7,6 +7,7 @@ import { RequireAuth } from '@/auth/useAuth'
 import Home from '@/pages/Home'
 import Register from '@/pages/Register'
 import Profile from '@/pages/Profile'
+import Admin from '@/pages/Admin'
 
 const AppRoutes = () => {
   return (
@@ -17,7 +18,23 @@ const AppRoutes = () => {
           <Route path="/SignUp" element={<Register />} />
           <Route path="/SignIn" element={<Register />} />
           <Route
+            path="/Admin"
+            element={
+              <RequireAuth>
+                <Admin />
+              </RequireAuth>
+            }
+          />
+          <Route
             path="/Profile"
+            element={
+              <RequireAuth>
+                <Profile />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/EditUser/:id"
             element={
               <RequireAuth>
                 <Profile />

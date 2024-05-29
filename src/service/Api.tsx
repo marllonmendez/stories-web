@@ -18,9 +18,9 @@ class Api {
     })
   }
 
-  async updateProfile({ name, email }: IUser) {
+  async ProfileUpdatedUser({ name, email }: IUser) {
     return await service.put(
-      '/profile/updated',
+      '/profile/user/updated',
       { name, email },
       {
         headers: {
@@ -28,6 +28,30 @@ class Api {
         },
       },
     )
+  }
+
+  async UpdatedUsers({ id, name, email }: IUser) {
+    return await service.put(
+      `/user/update/${id}`,
+      { name, email },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      },
+    )
+  }
+
+  async GetUsers() {
+    return await service.get('/users')
+  }
+
+  async EditUser({ id }: IUser) {
+    return await service.get(`/user/${id}`)
+  }
+
+  async DeleteUser({ id }: IUser) {
+    return await service.delete(`/user/delete/${id}`)
   }
 }
 

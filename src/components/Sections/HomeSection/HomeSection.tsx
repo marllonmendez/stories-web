@@ -25,7 +25,7 @@ export function HomeSection() {
             <Button
               label="Sign up"
               page="/SignUp"
-              className="w-1/2 bg-purple/75 text-light border-none hover:bg-purple transition ease-in duration-300"
+              className="w-1/2 bg-purple/75 text-light border-none p-2 mb-8 px-6 py-3 hover:bg-purple transition ease-in duration-300"
             />
           </div>
           <motion.div

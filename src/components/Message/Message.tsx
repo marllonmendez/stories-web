@@ -31,7 +31,7 @@ export function Message({ title, description, onClose }: MessageProps) {
         </div>
         <Button
           label="Fechar"
-          className="w-[200px] rounded-e rounded-l mt-4 bg-purple/75 text-light border-none hover:bg-purple transition ease-in duration-300"
+          className="w-[200px] rounded-e rounded-l mt-4 bg-purple/75 text-light border-none p-2 mb-8 px-6 py-3 hover:bg-purple transition ease-in duration-300"
           onClick={onClose}
         />
       </motion.div>

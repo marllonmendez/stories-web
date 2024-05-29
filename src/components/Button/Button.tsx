@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 type ButtonProps = {
-  label: string
+  label?: string
   value?: string
   className?: string
   page?: string
@@ -26,8 +26,7 @@ export function Button({
             type="submit"
             value={value}
             onClick={onClick}
-            className={`p-2 mb-8 px-6 py-3 text-xl font-bold border-none rounded-3xl bg-purple/75 text-light shadow-2xl hover:bg-purple transition ease-in duration-300
-            ${className}`}
+            className={`flex items-center justify-center text-lg font-bold rounded-3xl shadow-2xl ${className}`}
           >
             {label}
             {children}
@@ -38,7 +37,7 @@ export function Button({
           type="submit"
           value={value}
           onClick={onClick}
-          className={`p-2 mb-8 px-6 py-3 text-xl font-bold rounded-3xl shadow-2xl ${className}`}
+          className={`flex items-center justify-center  text-lg font-bold rounded-3xl shadow-2xl ${className}`}
         >
           {label}
           {children}

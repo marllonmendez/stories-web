@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import emailjs from '@emailjs/browser'
 
 import { Container, SubContainer } from '@/components/Container'
-import { Input, InputMessage } from '@/components/Input'
+import { Input } from '@/components/Input'
 import { Button } from '@/components/Button'
-
 import { PublicKey, ServiceID, TemplateID } from '@/utils/EmailJS'
 
-export function ContactSection() {
+import emailjs from '@emailjs/browser'
+
+const ContactSection = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
@@ -33,6 +33,7 @@ export function ContactSection() {
         setName('')
         setEmail('')
         setMessage('')
+        alert('Mensagem enviado com sucesso!')
       },
       (err) => {
         console.log('ERRO: ', err)
@@ -76,7 +77,8 @@ export function ContactSection() {
             value={email}
             updateValue={(value) => setEmail(value)}
           />
-          <InputMessage
+          <Input
+            type="text"
             placeHolder="Mensagem"
             maxLength={500}
             value={message}
@@ -85,7 +87,7 @@ export function ContactSection() {
           <div className="flex flex-col items-center justify-center text-center">
             <Button
               label="Enviar"
-              className="w-1/2 bg-purple/75 text-light border-none hover:bg-purple transition ease-in duration-300"
+              className="w-1/2 bg-purple/75 text-light border-none p-2 mb-8 px-6 py-3 hover:bg-purple transition ease-in duration-300"
             />
           </div>
         </motion.form>
@@ -93,3 +95,5 @@ export function ContactSection() {
     </Container>
   )
 }
+
+export default ContactSection

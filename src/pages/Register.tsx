@@ -111,7 +111,7 @@ const Register = () => {
           email: InputEmail.value,
           password: InputPassword.value,
         },
-        handleSignInCallback, // Correção aqui
+        handleSignInCallback,
       )
       console.log('Usuário logado')
     } else {
@@ -122,7 +122,7 @@ const Register = () => {
           email: InputEmail.value,
           password: InputPassword.value,
         },
-        handleSignupCallback, // Correção aqui
+        handleSignupCallback,
       )
       console.log('Usuário registrado')
     }
@@ -168,7 +168,7 @@ const Register = () => {
               onClick={
                 isLogin ? handleLogoutButtonClick : handleLoginButtonClick
               }
-              className="w-full bg-purple/75 text-light border-none hover:bg-purple transition ease-in duration-300"
+              className="w-full bg-purple/75 text-light border-none p-2 mb-8 px-6 py-3 hover:bg-purple transition ease-in duration-300"
             />
             <motion.img
               src={`${isLogin ? SingUp : SingIn}`}
@@ -211,7 +211,6 @@ const Register = () => {
               onSubmit={handleSubmit}
             >
               {isLogin ? (
-                // campos para login
                 <>
                   <Input
                     type="email"
@@ -236,7 +235,6 @@ const Register = () => {
                   />
                 </>
               ) : (
-                // campos para cadastro
                 <>
                   <Input
                     type="text"
@@ -274,7 +272,7 @@ const Register = () => {
               <div className="flex flex-col items-center justify-center text-center">
                 <Button
                   label={`${isLogin ? 'Sing in' : 'Sing up'}`}
-                  className="w-1/2 bg-purple/75 text-light border-none hover:bg-purple transition ease-in duration-300"
+                  className="w-1/2 bg-purple/75 text-light border-none p-2 mb-8 px-6 py-3 hover:bg-purple transition ease-in duration-300"
                 />
               </div>
             </motion.form>
