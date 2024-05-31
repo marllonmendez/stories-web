@@ -17,30 +17,9 @@ const AppRoutes = () => {
           <Route path="/" element={<Home />} />
           <Route path="/SignUp" element={<Register />} />
           <Route path="/SignIn" element={<Register />} />
-          <Route
-            path="/Admin"
-            element={
-              <RequireAuth>
-                <Admin />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/Profile"
-            element={
-              <RequireAuth>
-                <Profile />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/EditUser/:id"
-            element={
-              <RequireAuth>
-                <Profile />
-              </RequireAuth>
-            }
-          />
+          <Route path="/Admin" element={<Admin />} />
+          <Route path="/Profile" element={<Profile />} />
+          <Route path="/EditUser/:id" element={<Profile />} />
         </Routes>
       </Router>
     </AuthProvider>

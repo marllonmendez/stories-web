@@ -70,7 +70,7 @@ export const Input: React.FC<IInput> = ({
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}
             autoComplete="off"
-            className="resize-none w-[500px] h-[138px] bg-gray-600/20 rounded-lg placeholder:text-light text-light p-4 focus:outline-none focus:ring-2 ring-purple"
+            className="resize-none w-[500px] h-[138px] bg-gray-600/20 rounded-lg placeholder:text-light text-light p-4 focus:outline-none focus:ring-2 ring-purple sm:w-[300px] xs:w-[300px]"
           />
         ) : (
           <input
@@ -85,7 +85,7 @@ export const Input: React.FC<IInput> = ({
             onBlur={handleInputBlur}
             autoComplete="off"
             ref={inputRef}
-            className="w-[500px] h-14 bg-gray-600/20 placeholder:text-light text-light p-4 focus:outline-none focus:ring-2 ring-purple px-4 py-2 rounded-lg pl-10"
+            className="w-[500px] h-14 bg-gray-600/20 placeholder:text-light text-light p-4 focus:outline-none focus:ring-2 ring-purple px-4 py-2 rounded-lg pl-10 sm:w-[300px] xs:w-[300px]"
           />
         )}
 

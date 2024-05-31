@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useMediaQuery } from 'react-responsive'
 import { Pencil, UserRoundX, ArrowLeft, RotateCw } from 'lucide-react'
 import { AnimatePresence } from 'framer-motion'
 
@@ -12,6 +13,7 @@ import Api from '@/service/Api'
 
 const Admin = () => {
   const navigate = useNavigate()
+  const isLg = useMediaQuery({ query: '(max-width: 1023px)' })
   const [users, setUsers] = useState([])
   const [successMessage, setSuccessMessage] = useState<boolean>(false)
   const [startIndex, setStartIndex] = useState(0)

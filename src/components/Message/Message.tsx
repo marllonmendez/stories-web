@@ -21,7 +21,7 @@ export function Message({ title, description, onClose }: MessageProps) {
           duration: 1,
           ease: [0, 0.71, 0.2, 1.01],
         }}
-        className="flex flex-col relative items-center justify-center bg-light px-32 py-10 rounded-e rounded-l shadow"
+        className="flex flex-col relative items-center justify-center bg-light px-32 py-10 rounded-e rounded-l shadow xs:px-10 sm:px-10"
       >
         <CloseButton onClick={onClose} />
         <div className="flex flex-col items-center justify-center my-2">

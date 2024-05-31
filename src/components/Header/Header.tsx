@@ -24,11 +24,9 @@ export function Header() {
   ]
 
   return (
-    <header className="flex items-center justify-between md:px-14 lg:px-36 py-7">
-      <div className="h-7 w-7">
-        <img src={Logo} alt="logo" />
-      </div>
-      <div className="md:flex gap-4">
+    <header className="flex items-center justify-between py-7 px-28 lg:px-8 md:px-8 sm:px-8 xs:px-8 lg:pb-0">
+      <img src={Logo} alt="logo" className="h-10 w-10" />
+      <div className="flex gap-4">
         {headerItems.map((item) => (
           <motion.nav
             key={item.id}

@@ -13,11 +13,13 @@ import { IUser, IEventForm } from '@/interfaces'
 
 import SingIn from '@/assets/SingIn.svg'
 import SingUp from '@/assets/SingUp.svg'
+import { useMediaQuery } from 'react-responsive'
 
 const Register = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const auth = useAuth()
+  const isLg = useMediaQuery({ query: '(max-width: 1023px)' })
   const [isLogin, setIsLogin] = useState(location.pathname === '/SignIn')
   const [successMessage, setSuccessMessage] = useState<boolean>(false)
   const [error, setError] = useState<IUser>()
@@ -141,7 +143,7 @@ const Register = () => {
           )}
         </AnimatePresence>
         <motion.div
-          className={`flex flex-grow items-center justify-center text-center bg-dark/75 text-light w-1/2 min-h-[80svh] ${isLogin ? 'rounded-e-3xl' : 'rounded-s-3xl'}`}
+          className={`flex flex-grow items-center justify-center text-center bg-dark/75 text-light w-1/2 min-h-[80svh] ${isLogin ? 'rounded-e-3xl' : 'rounded-s-3xl'} lg:hidden xl:hidden sm:hidden xs:hidden`}
           animate={{ opacity: 1, x: isLogin ? '100%' : 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
@@ -188,9 +190,9 @@ const Register = () => {
           </motion.div>
         </motion.div>
         <motion.div
-          className={`flex flex-grow items-center justify-center text-center bg-darkSecondary/50 text-light w-1/2 min-h-[80svh] ${isLogin ? 'rounded-s-3xl' : 'rounded-e-3xl'}`}
-          animate={{ opacity: 1, x: isLogin ? '-100%' : 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          className={`flex flex-grow items-center justify-center text-center bg-darkSecondary/50 text-light w-1/2 min-h-[80svh] ${isLogin ? 'rounded-s-3xl lg:rounded-e-3xl' : 'rounded-e-3xl lg:rounded-s-3xl'}`}
+          animate={!isLg ? { opacity: 1, x: isLogin ? '-100%' : 0 } : undefined}
+          transition={!isLg ? { duration: 0.5, delay: 0.2 } : undefined}
         >
           <div className="flex flex-col gap-5">
             <motion.h1
@@ -269,7 +271,16 @@ const Register = () => {
                   />
                 </>
               )}
-              <div className="flex flex-col items-center justify-center text-center">
+              <div className="flex flex-col items-center justify-center text-center gap-5">
+                <div className="hidden lg:flex flex-row items-center">
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: isLogin
+                        ? `É novo por aqui? Faça <a href="/SignUp" class="sign-button">Sign up</a>`
+                        : `Já se registrou antes? Faça <a href="/SignIn" class="sign-button">Sign in</a>`,
+                    }}
+                  />
+                </div>
                 <Button
                   label={`${isLogin ? 'Sing in' : 'Sing up'}`}
                   className="w-1/2 bg-purple/75 text-light border-none p-2 mb-8 px-6 py-3 hover:bg-purple transition ease-in duration-300"
