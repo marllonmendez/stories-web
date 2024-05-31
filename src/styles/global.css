@@ -2,16 +2,21 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-*::-webkit-scrollbar {
-  width: 10px;
-}
+/**::-webkit-scrollbar {*/
+/*  width: 10px;*/
+/*}*/
 
-*::-webkit-scrollbar-track {
-  background-color: #7B68EE;
-}
+/**::-webkit-scrollbar-track {*/
+/*  background-color: #7B68EE;*/
+/*}*/
 
-*::-webkit-scrollbar-thumb {
-  background-color: #FFA500;
+/**::-webkit-scrollbar-thumb {*/
+/*  background-color: #FFA500;*/
+/*  border-radius: 100px;*/
+/*}*/
+
+.sign-button {
+  color: #FFA500;
 }
 
 .custom-gradient {

@@ -1,4 +1,4 @@
-# Stories
+# Stories Web
 
 <div align="center">
 
@@ -10,6 +10,7 @@
 [![React.js](https://img.shields.io/badge/React-520AD1?style=for-the-badge&logo=react&logoColor=white)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-520AD1?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-520AD1?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Lucide Icons](https://img.shields.io/badge/Lucide%20Icons-520AD1?style=for-the-badge&logo=react&logoColor=white)](https://lucide.dev/guide/)
 [![Prettier](https://img.shields.io/badge/prettier-520AD1?style=for-the-badge&logo=prettier&logoColor=white)](https://prettier.io/)
 [![ESLint](https://img.shields.io/badge/eslint-520AD1?style=for-the-badge&logo=eslint&logoColor=white)](https://eslint.org/)
 [![Vite](https://img.shields.io/badge/Vite-520AD1?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
@@ -39,14 +40,21 @@ npm install
 <h4>3. Build do projeto</h4>
 
 ```bash
-vite build
+npm run build
 ```
 
 <h4>4. Execução local</h4>
 
 ```bash
-vite run
+npm run dev
 ```
+
+<h4>5. Visualização de componentes</h4>
+
+```bash
+npm run storybook
+```
+
 
 ## Licença
 

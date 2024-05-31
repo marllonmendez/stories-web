@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import emailjs from '@emailjs/browser'
 
 import { Container, SubContainer } from '@/components/Container'
-import { Input, InputMessage } from '@/components/Input'
+import { Input } from '@/components/Input'
 import { Button } from '@/components/Button'
-
 import { PublicKey, ServiceID, TemplateID } from '@/utils/EmailJS'
+
+import emailjs from '@emailjs/browser'
 
 export function ContactSection() {
   const [name, setName] = useState('')
@@ -33,6 +33,7 @@ export function ContactSection() {
         setName('')
         setEmail('')
         setMessage('')
+        alert('Mensagem enviado com sucesso!')
       },
       (err) => {
         console.log('ERRO: ', err)
@@ -43,11 +44,11 @@ export function ContactSection() {
   return (
     <Container
       label="contact"
-      className="flex items-center justify-center h-full w-full bg-dark text-light"
+      className="flex items-center justify-center bg-dark text-light"
     >
       <SubContainer className="flex flex-col items-center justify-center text-center gap-5">
         <motion.h1
-          className="text-light text-3xl md:text-3xl xs:text-xl font-medium"
+          className="text-light text-3xl xs:text-2xl font-medium"
           initial={{ opacity: 0, x: -100 }}
           whileInView={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -100 }}
@@ -57,7 +58,7 @@ export function ContactSection() {
           Entre em contato
         </motion.h1>
         <motion.form
-          className="flex flex-col w-full h-full gap-5 lg:p-2 md:p-2"
+          className="flex flex-col gap-5"
           onSubmit={sendEmail}
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -76,14 +77,18 @@ export function ContactSection() {
             value={email}
             updateValue={(value) => setEmail(value)}
           />
-          <InputMessage
+          <Input
+            type="text"
             placeHolder="Mensagem"
             maxLength={500}
             value={message}
             updateValue={(value) => setMessage(value)}
           />
           <div className="flex flex-col items-center justify-center text-center">
-            <Button label="Enviar" className="w-1/2" />
+            <Button
+              label="Enviar"
+              className="w-1/2 bg-purple/75 text-light border-none p-2 mb-8 px-6 py-3 hover:bg-purple transition ease-in duration-300 lg:w-full"
+            />
           </div>
         </motion.form>
       </SubContainer>
